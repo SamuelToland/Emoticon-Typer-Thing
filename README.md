@@ -18,3 +18,8 @@ I was bored when looking at Discord's "/shrug" command and thought it would be c
   - Change Prefix key
   - Change Auto-compleate key
   - Change the list of commands and emoticons/results
+
+### Dependencies
+- Python 3 (untested on any other versions)
+- PynPut (https://pypi.org/project/pynput/)
+- Windows (only tested on Win10)
