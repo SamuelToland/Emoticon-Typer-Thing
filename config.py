@@ -3,7 +3,7 @@
 #######################
 Prefix = "\\" 											# The character used to tell the script user is starting a command
 AutoCompleteKey = "`"
-
+FailSafeKey = "page_up"
 Commands = { 											# the table holding all of the commands and results
 	"shrug": "¯\\_(ツ)_/¯",
 	"tableflip": "(╯°□°）╯︵ ┻━┻",
@@ -32,6 +32,5 @@ Commands = { 											# the table holding all of the commands and results
 	"sad": "(ﾟ∩ﾟ)",
 	"myman": "(☞ﾟ∀ﾟ)☞",
 	"handonhead": "(>‘o’)>",
-	"HHH": "HHH",
-	"rickroll": "https://www.youtube.com/watch?v=oHg5SJYRHA0",
+	"rickroll": "https://www.youtube.com/watch?v=oHg5SJYRHA0"
 }
