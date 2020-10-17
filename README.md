@@ -12,10 +12,14 @@ I was bored when looking at Discord's "/shrug" command and thought it would be c
 - Decent tracking of keyboard input
   - Only accepts certain characters stored in a set
   - Reconises selecting and removing of the word or the whole text
-- Dictionary containing some commands and faces
 - Removing of the original command and typing of the result
 - Auto-compleating of a partial typed command
-- Config section
+- Config file
   - Change Prefix key
   - Change Auto-compleate key
   - Change the list of commands and emoticons/results
+
+### Dependencies
+- Python 3.8.5 (untested on other versions)
+- PynPut (https://pypi.org/project/pynput/)
+- Windows (only tested on Win10)
