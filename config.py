@@ -3,7 +3,7 @@
 #######################
 Prefix = "\\" 				# The character used to tell the script when to start listening for a command
 AutoCompleteKey = "`" 		# The chatacter used to tell the script when to try to auto-fill your command
-FailSafeKey = "page_up" 	# The character used to end teh script 
+FailSafeKey = "page_up" 	# The character used to end the script 
 
 Commands = { 				# The table holding all the commands and results
 	"shrug": "¯\\_(ツ)_/¯",
