@@ -1,10 +1,11 @@
 #######################
 #	Config
 #######################
-Prefix = "\\" 											# The character used to tell the script user is starting a command
-AutoCompleteKey = "`"
-FailSafeKey = "page_up"
-Commands = { 											# the table holding all of the commands and results
+Prefix = "\\" 				# The character used to tell the script when to start listening for a command
+AutoCompleteKey = "`" 		# The chatacter used to tell the script when to try to auto-fill your command
+FailSafeKey = "page_up" 	# The character used to end teh script 
+
+Commands = { 				# The table holding all the commands and results
 	"shrug": "¯\\_(ツ)_/¯",
 	"tableflip": "(╯°□°）╯︵ ┻━┻",
 	"tableunflip": "┬─┬ ノ( ゜-゜ノ)",

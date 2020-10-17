@@ -2,12 +2,12 @@
 #	Imports
 #######################
 # Files
-from config import *
-from functions import *
-import settings
+from config import *  		# All vars that are set by user before runnning
+from functions import * 	# All our functions
+import settings 			# All vars that are being shared across whole program
 
 # Modules
-from pynput import keyboard  							# For keyboard monitoring and control
+from pynput import keyboard 	# For keyboard monitoring and control
 
 #######################
 #	Values
@@ -20,11 +20,11 @@ HotKeyListen = {"ctrl_l": False, "shift": False, "left": False, "": False} 	# F
 #######################
 #	Functions
 #######################
-# Check and listen to key presses for key characters
+# Check and listen to key presses for important characters
 def CheckKeyPress(key):
 	# Setting key's name
-	try: 													# Getting keyboard input as string to compare against 
-		k = key.char
+	try:            	# Getting keyboard input as string to easier compare against 
+		k = key.char 	
 	except:
 		k = key.name
 
@@ -32,18 +32,18 @@ def CheckKeyPress(key):
 	global HotKeyListen
 
 	# Statements
-	if k == settings.FailSafeKey: 							# To stop the whole listening, for failsafe
+	if k == FailSafeKey: 	# Failsafe to stop the whole keyboard.Listener incase of errors
 		print("Escaping")
 		return False
 
-	elif settings.IgnoreKeys > 0: 							# Check if we are to ignore the keypress (for when script is typing)
+	elif settings.IgnoreKeys > 0: 	# Check if we are to ignore the keypress (for when script is typing)
 		print("Ignoring")
 		settings.IgnoreKeys = settings.IgnoreKeys - 1
 
-	elif k == Prefix and k != "ctrl_l": 					# Checking for prefix to start command listening 
+	elif k == Prefix and k != "ctrl_l": 	# Checking for prefix to start command listening 
 		if not settings.ListenCommand:
 			StartCommandListening()
-		else:												# If already listening then lets restart the listen
+		else:								# If already listening then lets restart the listen
 			StopCommandListening()
 			StartCommandListening()
 
@@ -69,36 +69,36 @@ def CheckKeyPress(key):
 			elif HotKeyListen["ctrl_l"] and HotKeyListen[""]: 						# They're selecting everything in the text box
 				settings.AllSelected = True
 
-		elif k == AutoCompleteKey and not (settings.AllSelected or settings.WordSelected): 	
+		elif k == AutoCompleteKey and not (settings.AllSelected or settings.WordSelected): 	# They're autocompleating the command (if they havent got it selected subsiquently removing the word)
 			CheckMatchingCommands(settings.TypedCommand)
 
-		elif k in CommandChars and k != "ctrl_l": 						# Checking if input is in our allowed command characters as to stop utility keys (such as enter, insert, etc)
-			if settings.WordSelected == True:
+		elif k in CommandChars and k != "ctrl_l": 					# Checking if input is in our allowed command characters as to stop utility keys (such as enter, insert, save, etc)
+			if settings.WordSelected == True:						# They're replacing their command with a character
 				ChangeTypedCommand("" + str(k))
-			elif settings.AllSelected == True:
+			elif settings.AllSelected == True: 						# They're replacing their whole text with a character so no more prefix (stop listening)
 				StopCommandListening()
-			else:
+			else: 									  				# They're adding a char to the command
 				ChangeTypedCommand(settings.TypedCommand + str(k))
 
 		print("Current Command: "+settings.TypedCommand)
 
-# Check for hot key releases
+# Check key releases to monitor "hot-key" presses
 def CheckKeyRelease(key):
-	try: 												# Getting keyboard input as string to compare against 
+	try: 				# Getting keyboard input as string to easier compare against 
 		k = key.char
 	except:
 		k = key.name
 
 	global HotKeyListen
 
-	if k == "page_up": 									# To stop the whole listening, for failsafe
+	if k == FailSafeKey: 		# Failsafe to stop the whole keyboard.Listener incase of errors
 		print("Escaping")
 		return False
 
-	elif k in HotKeyListen:
-		HotKeyListen[k] = False
+	elif k in HotKeyListen: 	# Tracking what keys are no longer held
+		HotKeyListen[k] = False 	
 
-	elif (settings.WordSelected or settings.AllSelected) and k == "right":
+	elif (settings.WordSelected or settings.AllSelected) and k == "right": 	# They're de-selecting the word or text
 		settings.WordSelected = False
 		settings.AllSelected = False
 
@@ -107,6 +107,6 @@ def CheckKeyRelease(key):
 # Main	
 #######################
 # Key Listener
-listener = keyboard.Listener(on_press=CheckKeyPress, on_release=CheckKeyRelease) 	# Creating a keyboard listener to run 'CheckKeyPress' on keyboard input
+listener = keyboard.Listener(on_press=CheckKeyPress, on_release=CheckKeyRelease) 	# Creating a keyboard listener that will allow us to watch for key presses
 listener.start() 										
 listener.join()
